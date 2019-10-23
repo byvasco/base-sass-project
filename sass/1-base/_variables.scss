@@ -1,0 +1,33 @@
+/**
+ * Base
+ * Variables
+ */
+
+// Colors
+@function get-color($main, $variation: null, $palette: null) {
+  @if $palette == null {
+    $palette: $colors;
+  }
+
+  @if $variation {
+    @return map-get(map-get($palette, $main), $variation);
+  } @else {
+    @return map-get($palette, $main);
+  }
+}
+
+$colors: (
+  basic: (
+    white: #fff,
+    black: #000
+  )
+);
+
+//Layout
+$container-width: 1340px;
+$container-padding: 20px;
+$column-width: 82px;
+$gap-width: 30px;
+$col-4: ($column-width * 4) + ($gap-width * 3);
+$col-5: ($column-width * 5) + ($gap-width * 4);
+$col-6: ($column-width * 6) + ($gap-width * 5);

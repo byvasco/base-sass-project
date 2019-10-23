@@ -1,0 +1,14 @@
+.DS_Store
+*/.DS_Store
+
+/package.lock
+
+_site
+
+.sass-cache
+*.css.map
+
+.jekyll-metadata
+
+.netlify
+
