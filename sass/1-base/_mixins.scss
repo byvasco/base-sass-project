@@ -1,11 +1,13 @@
-/**
- * Base
- * Mixins
- */
+// 
+// Base
+// Mixins
+// 
+
+$images-path: '../images/';
 
 // Sets background properties
 @mixin background($name: null, $color: null, $posX: center, $posY: center, $size: null, $repeat: no-repeat) {
-  background: image-url(#{$name}) $color $posX $posY $repeat;
+  background: image-url(#{$images-path}#{$name}) $color $posX $posY $repeat;
   background-size: $size;
 }
 
@@ -73,4 +75,39 @@
   @media (max-width: $size+"px") {
     @content;
   }
+}
+
+// Replace text with image
+@mixin replace-text($image, $pos-x: center, $pos-y: center, $size: cover, $width: null, $height: null) {
+  text-indent: -999999em;
+  overflow: hidden;
+  text-align: left;
+  display: inline-block;
+  width: $width;
+  height: $height;
+
+  @include background($image, $pos-x, $pos-y, $size);
+}
+
+// Creates icon with or without a mask
+@mixin icon($icon, $width, $height, $color: null) {
+  display: inline-block;
+  @include wh($width, $height);
+  
+  @if $color {
+    background-color: $color;
+    -webkit-mask: url('../images/icons/icon-#{$icon}.svg') no-repeat;
+    -webkit-mask-size: 100%;
+    mask: url('../images/icons/icon-#{$icon}.svg') no-repeat;
+    mask-size: 100%;
+  } @else {
+    @include background('../images/icons/icon-#{$icon}.svg', $size: 100%);
+  }
+}
+
+// Transform mixin
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -ms-transform: $property;
+  transform: $property;
 }

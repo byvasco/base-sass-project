@@ -26,11 +26,7 @@
 .flex {
   @include flex();
 
-  &-center-hor {
+  &-center {
     @include flex(center);
-  }
-
-  &-center-all {
-    @include flex(center, center, column);
   }
 }
