@@ -1,7 +1,7 @@
-// 
+//
 // Base
 // Mixins
-// 
+//
 
 $images-path: '../images/';
 
@@ -29,6 +29,13 @@ $images-path: '../images/';
   min-width: $min-w;
   max-height: $max-h;
   min-height: $min-h;
+}
+
+// Hides Text
+@mixin hide-text() {
+  text-indent: -999999em;
+  overflow: hidden;
+  text-align: left;
 }
 
 // Sets position, coordinates and z-index value.
@@ -93,7 +100,7 @@ $images-path: '../images/';
 @mixin icon($icon, $width, $height, $color: null) {
   display: inline-block;
   @include wh($width, $height);
-  
+
   @if $color {
     background-color: $color;
     -webkit-mask: url('../images/icons/icon-#{$icon}.svg') no-repeat;
@@ -110,4 +117,19 @@ $images-path: '../images/';
   -webkit-transform: $property;
   -ms-transform: $property;
   transform: $property;
+}
+
+// Sets "content" and "display" for ::before and ::after
+@mixin pseudo($content: '', $display: block) {
+  content: $content;
+  display: $display;
+}
+
+// Creates borders using box-shadow
+@mixin border($top: 0, $bottom: 0, $left: 0, $right: 0, $all: 0, $color: get-color(grey, solid-7)) {
+  @if $all {
+    box-shadow: inset 0 #{$all} 0 0 #{$color}, inset 0 -#{$all} 0 0 #{$color}, inset #{$all} 0 0 0 #{$color}, inset -#{$all} 0 0 0 #{$color};
+  } @else {
+    box-shadow: inset 0 #{$top} 0 0 #{$color}, inset 0 -#{$bottom} 0 0 #{$color}, inset #{$left} 0 0 0 #{$color}, inset -#{$right} 0 0 0 #{$color};
+  }
 }
